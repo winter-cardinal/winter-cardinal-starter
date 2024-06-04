@@ -69,3 +69,27 @@ npm run build:esbuild
 ```
 npm run watch:esbuild
 ```
+
+## Proxy
+
+### Gradle
+
+```
+# ~/.gradle/gradle.properties
+systemProp.http.proxyHost=proxy-host
+systemProp.http.proxyPort=proxy-port
+systemProp.http.nonProxyHosts=no-proxy-host-a|no-proxy-host-b
+systemProp.https.proxyHost=proxy-host
+systemProp.https.proxyPort=proxy-port
+systemProp.https.nonProxyHosts=no-proxy-host-a|no-proxy-host-b
+```
+
+### NPM
+
+```
+# ~/.npmrc
+proxy=http://proxy-host:proxy-port/
+https-proxy=http://proxy-host:proxy-port/
+noproxy[]=no-proxy-host-a
+noproxy[]=no-proxy-host-b
+```

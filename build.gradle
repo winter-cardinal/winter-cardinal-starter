@@ -6,10 +6,19 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+// GENERAL
 def packageJson = new groovy.json.JsonSlurper().parseText(file('package.json').text);
-group = 'wcardinal'
-archivesBaseName = 'wcardinal-starter'
-version = packageJson.version
+def packageName = packageJson.name;
+def slashIndex = packageName.indexOf("/");
+if (0 <= slashIndex) {
+	group = packageName.substring(1, slashIndex);
+	archivesBaseName = packageName.substring(slashIndex + 1);
+	version = packageJson.version;
+} else {
+	group = "com";
+	archivesBaseName = packageName;
+	version = packageJson.version;
+}
 
 // REPOSITORY
 repositories {
