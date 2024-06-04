@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<th:block th:fragment="head (title)">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title th:text="${title}"></title>
+	<link href="/image/favicon.ico" type="image/vnd.microsoft.icon" rel="shortcut icon">
+
+	<link th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}">
+	<link th:src="@{/webjars/pixi.js/pixi.min.js}">
+	<link th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}">
+	<link th:src="@{|/webjars/wcardinal-ui/wcardinal-ui-theme-white-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}">
+	<link th:src="@{|/asset/message-script/${product.version}/message-script-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}">
+
+	<style>
+	html, body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		background-color: #eeeeee;
+
+		print-color-adjust: exact;
+		-webkit-print-color-adjust: exact;
+	}
+
+	canvas {
+		outline: none;
+	}
+
+	#signout-form {
+		display: none;
+	}
+	</style>
+	<style>
+	/* BANNER */
+	#banner {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #eeeeee;
+		pointer-events: none;
+	}
+
+	#banner.done {
+		animation: banner-done-keys 0.166s 1 ease-in-out;
+	}
+
+	@keyframes banner-done-keys {
+		0% { opacity: 1; }
+		100% { opacity: 0; }
+	}
+
+	#banner p {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -100%);
+
+		color: #ccc;
+		font-size: 26px;
+		font-weight: bold;
+		text-align: center;
+
+		margin: 0;
+	}
+
+	#banner-header {
+		display: block;
+		position: relative;
+		box-sizing: border-box;
+		width: 100%;
+		height: 54px;
+		background: #303045 0% 0% no-repeat padding-box;
+		padding: 0;
+	}
+	</style>
+</th:block>
+<th:block th:fragment="body (title)">
+	<form id="signout-form" th:action="@{/signout}" method="post">
+		<button id="signout-button" type="submit"></button>
+	</form>
+	<div id="banner">
+		<p th:text="${title}"></p>
+	</div>
+	<script th:inline="javascript">
+	(function(){
+		const startTime = Date.now();
+		var checker = function() {
+			if( document.body.querySelector( "canvas" ) != null ) {
+				console && console.log( "Content load finished at", Date.now() - startTime, "ms" );
+				var banner = document.querySelector( "#banner" );
+				if( banner.style.animationName !== undefined ) {
+					banner.setAttribute( "class", "done" );
+					banner.addEventListener( "animationend", function( e ) {
+						if( banner === e.target && banner.parentElement != null ) {
+							banner.parentElement.removeChild( banner );
+						}
+					});
+				} else {
+					banner.parentElement.removeChild( banner );
+				}
+			} else {
+				setTimeout( checker, 16 );
+			}
+		};
+		checker();
+	}());
+	</script>
+	<script th:inline="javascript" th:if="${_csrf != null}">
+	var csrf = /*[( '{"'+${_csrf.headerName}+'":"'+${_csrf.token}+'"}' )]*/undefined;
+	</script>
+</th:block>
+</html>

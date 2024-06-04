@@ -1,0 +1,5 @@
+{
+	"pixi.js": "PIXI",
+	"@wcardinal/wcardinal": "wcardinal",
+	"@wcardinal/wcardinal-ui": "wcardinal.ui"
+}

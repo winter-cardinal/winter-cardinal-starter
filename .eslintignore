@@ -1,0 +1,11 @@
+.gradle
+.vscode
+bin
+build
+dist
+gradle
+src/main/java
+src/main/resources
+node_modules
+rollup.config.js
+esbuild.config.js

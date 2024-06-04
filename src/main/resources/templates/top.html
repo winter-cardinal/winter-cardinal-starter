@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:with="title=#{top.label}">
+<head>
+	<th:block th:insert="common :: head(${title})"></th:block>
+</head>
+<body>
+	<th:block th:insert="common :: body(${title})"></th:block>
+	<script th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}"></script>
+	<script th:src="@{/top-controller}"></script>
+	<script th:src="@{/webjars/pixi.js/pixi.min.js}"></script>
+	<script th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}"></script>
+	<script th:src="@{|/webjars/wcardinal-ui/wcardinal-ui-theme-white-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}"></script>
+	<script th:src="@{|/asset/message-script/${product.version}/message-script-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}"></script>
+	<script th:src="@{/webjars/wcardinal-starter/top.min.js}"></script>
+	<script th:inline="javascript">
+	(function(){
+		"use strict";
+		new wcs.Top({
+			controller: topController,
+			csrf: window.csrf
+		});
+	}());
+	</script>
+</body>
+</html>

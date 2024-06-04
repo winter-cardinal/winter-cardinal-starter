@@ -1,0 +1,47 @@
+{
+	"name": "@wcardinal/wcardinal-starter",
+	"version": "0.1.0",
+	"description": "WinterCardinal Starter",
+	"license": "Apatche-2.0",
+	"private": true,
+	"scripts": {
+		"build": "rimraf -G build/tmp/javascript && tsc && rollup -c",
+		"build:ts": "rimraf -G build/tmp/javascript && tsc",
+		"build:rollup": "rimraf -G build/tmp/javascript && tsc && rollup -c",
+		"build:esbuild": "node esbuild.config.js",
+		"watch:ts": "tsc -w",
+		"watch:ts:ne": "tsc -w -noEmit",
+		"watch:rollup": "rollup -c -w",
+		"watch:esbuild": "node esbuild.config.js -w",
+		"lint": "eslint src/main/typescript",
+		"lint:fix": "eslint src/main/typescript --fix"
+	},
+	"dependencies": {
+		"@wcardinal/wcardinal": "^1.0.3",
+		"@wcardinal/wcardinal-ui": "^0.434.0",
+		"pixi.js": "5.3.12"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^21.0.3",
+		"@rollup/plugin-multi-entry": "^4.1.0",
+		"@rollup/plugin-node-resolve": "13.3.0",
+		"@typescript-eslint/eslint-plugin": "^5.17.0",
+		"@typescript-eslint/parser": "^5.17.0",
+		"esbuild": "0.17.14",
+		"esbuild-plugin-external-global": "^1.0.1",
+		"eslint": "^8.12.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-unused-imports": "^2.0.0",
+		"fs-extra": "^11.1.1",
+		"prettier": "^2.6.1",
+		"rimraf": "^3.0.2",
+		"rollup": "^2.70.1",
+		"rollup-plugin-copy": "^3.4.0",
+		"rollup-plugin-delete": "^2.0.0",
+		"rollup-plugin-sourcemaps": "^0.6.3",
+		"rollup-plugin-terser": "^7.0.2",
+		"tslib": "^2.4.0",
+		"typescript": "^4.6.4"
+	}
+}

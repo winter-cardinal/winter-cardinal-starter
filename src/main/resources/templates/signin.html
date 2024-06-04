@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title th:text="#{signin.sign-in}">Sign In</title>
+	<style>
+	html, body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		background-color: #eeeeee;
+
+		font: 400 18px "Helvetica Neue","Helvetica","Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Arial","Yu Gothic UI","Meiryo UI",sans-serif;
+		line-height: 30px;
+		color: #444;
+
+		overflow: hidden;
+
+		print-color-adjust: exact;
+		-webkit-print-color-adjust: exact;
+	}
+
+	#signin-form {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 382px;
+		transform: translate( -50%, -50% );
+		border-radius: 4px;
+		padding: 16px;
+		background: #fff;
+		box-shadow: 0px 3px 6px rgb(83 97 122 / 50%);
+	}
+
+	#signin-form-product {
+		font-weight: 400;
+		font-family: inherit;
+		font-size: 28px;
+		margin: 64px 0 64px 0;
+		text-align: center;
+		white-space: nowrap;
+		letter-spacing: 0px;
+		color: #53617a;
+	}
+
+	#signin-form-username,
+	#signin-form-password,
+	#signin-button {
+		position: relative;
+		left: 50%;
+		width: 256px;
+		height: 36px;
+		padding: 0 18px 0 18px;
+		display: block;
+		box-sizing: border-box;
+		border-radius: 4px;
+		margin: 0;
+		border: none;
+		outline: none;
+		transform: translate(-50%, 0);
+		background: #f6f6f6;
+		font-weight: 400;
+		font-family: inherit;
+		font-size: 14px;
+		line-height: 24px;
+	}
+
+	#signin-form-username:focus,
+	#signin-form-password:focus {
+		outline: #53617a solid 1.5px;
+		outline-offset: -1.5px;
+	}
+
+	#signin-form-password {
+		margin-top: 12px;
+	}
+
+	#signin-button {
+		border: 1px solid transparent;
+		margin: 24px 0 48px 0;
+		background: #53617a;
+		color: white;
+		cursor: pointer;
+	}
+
+	#signin-button:hover,
+	#signin-button:focus {
+		background: #63718a;
+	}
+
+	#signin-button:focus {
+		outline: #fff solid 1.5px;
+		outline-offset: -3.5px;
+	}
+
+	#signin-form-error {
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: -24px;
+		width: 100%;
+		transform: translate(-50%, -100%);
+		margin: 0;
+		padding: 8px;
+		color: white;
+		font-size: 16px;
+		text-align: center;
+		background: #f44336;
+		border-radius: 4px;
+		box-shadow: 0px 3px 6px #ff000059;
+		box-sizing: border-box;
+	}
+
+	#signin-form-error p {
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+</head>
+<body>
+	<form id="signin-form" th:action="@{/signin}" method="post">
+		<p id="signin-form-product">
+			<span class="name" th:text="#{product.label}"></span>
+		</p>
+		<div id="signin-form-error" th:if="${message} != null">
+			<p th:text="${message}">Invalid Username or Password</p>
+		</div>
+		<input id="signin-form-username" type="text" name="username" th:placeholder="#{signin.username}" required="" autofocus="">
+		<input id="signin-form-password" type="password" name="password" th:placeholder="#{signin.password}" required="">
+		<button id="signin-button" type="submit" th:text="#{signin.sign-in}">Sign In</button>
+	</form>
+</body>
+</html>
