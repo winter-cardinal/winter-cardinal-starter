@@ -9,13 +9,13 @@ apply plugin: 'eclipse'
 // GENERAL
 def packageJson = new groovy.json.JsonSlurper().parseText(file('package.json').text);
 def packageName = packageJson.name;
-def slashIndex = packageName.indexOf("/");
+def slashIndex = packageName.indexOf('/');
 if (0 <= slashIndex) {
 	group = packageName.substring(1, slashIndex);
 	archivesBaseName = packageName.substring(slashIndex + 1);
 	version = packageJson.version;
 } else {
-	group = "com";
+	group = 'com';
 	archivesBaseName = packageName;
 	version = packageJson.version;
 }
@@ -53,5 +53,5 @@ dependencies {
 	runtimeOnly 'com.h2database:h2:2.1.210'
 
 	// REQUIRED FOR JAVA 9+
-	implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
 }
