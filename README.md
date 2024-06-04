@@ -21,7 +21,8 @@ This starter includes:
 * MVC Controllers (`src/main/java/app/mvc/*`)
 * Page Controllers (`src/main/java/app/page/*`)
 * Top Page with a DDiagram sample (`src/main/typescript/top/*`)
-* I18N (`src/main/java/app/i18n/*`, `src/main/resources/i18n/*`, `src/main/resources/templates/*`)
+* I18N (`src/main/java/app/i18n/*`, `src/main/resources/i18n/*`, `src/main/resources/templates/*`, `src/main/java/app/mvc/MvcMessageScriptController.java`)
+* H2 DB (`build.gradle`)
 
 ## How to Run the Production Build
 

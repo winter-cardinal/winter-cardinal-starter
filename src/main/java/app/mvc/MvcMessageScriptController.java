@@ -1,4 +1,4 @@
-package app.i18n;
+package app.mvc;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import app.general.Product;
+import app.i18n.MessageService;
 
 @RestController
 @RequiredArgsConstructor
