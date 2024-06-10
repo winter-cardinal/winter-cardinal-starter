@@ -59,6 +59,8 @@ Please build `src/main/java/Main.java` with your IDE.
 npm run build
 ```
 
+The compiled JS files are located in `src\main\resources\META-INF\resources\webjars\`.
+
 ### Development Build (Clean Build)
 
 ```

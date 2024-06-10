@@ -4,33 +4,31 @@
 	<th:block th:insert="common/header"></th:block>
 	<style>
 		wcs-empty {
-			display: flex;
-			flex-direction: column;
+			display: block;
 			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
+			top: -20%;
+			left: -10%;
+			width: 170%;
+			height: 170%;
+			color: #e9e9e9;
+			border: none;
+			padding: 0;
+			margin: 0;
 		}
 
-		wcs-empty-label {
-			display: inline-block;
+		wcs-empty > svg {
+			display: block;
 			position: absolute;
-			top: 50%;
 			left: 50%;
-			transform: translate(-50%, -100%);
-
-			color: #ccc;
-			font-size: 26px;
-			font-weight: bold;
-			text-align: center;
+			top: 50%;
+			padding: 0;
+			margin: 0;
+			transform: translate(-50%, -50%);
 		}
 	</style>
 </head>
 <body>
-	<wcs-empty>
-		<wcs-empty-label th:text="#{empty.label}">Nothing to See Here</wcs-empty-label>
-	</wcs-empty>
+	<wcs-empty th:insert="image/earth"></wcs-empty>
 	<script th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}"></script>
 	<script th:src="@{/webjars/pixi.js/pixi.min.js}"></script>
 	<script th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}"></script>

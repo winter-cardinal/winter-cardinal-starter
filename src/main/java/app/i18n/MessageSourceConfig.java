@@ -29,7 +29,7 @@ public class MessageSourceConfig {
 	}
 
 	private Locale getDefaultLocale() {
-		return Locale.JAPAN;
+		return Locale.US;
 	}
 
 	private String[] getMessageSourceBasenames() {
