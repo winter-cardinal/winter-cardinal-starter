@@ -1,0 +1,214 @@
+<th:block th:fragment="head">
+	<style>
+		wcs-menu {
+			position: absolute;
+			display: flex;
+			box-sizing: border-box;
+			flex-direction: column;
+			top: 0;
+			left: 0;
+			width: 272px;
+			height: 100%;
+			max-width: 100%;
+			background: #fdfdfe;
+			box-shadow: 0px 3px 6px #00000059;
+			transition-duration: 0.2s;
+			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+			will-change: transform;
+			transition-property: transform, visibility, width;
+			transform: translate(-150%,0);
+			z-index: 200;
+			padding: 72px 8px 8px 8px;
+			outline: none;
+			color: #53617a;
+		}
+
+		wcs-menu.opened {
+			transform: translate(0,0);
+		}
+
+		wcs-menu-account {
+			position: absolute;
+			top: 16px;
+			left: 8px;
+			width: auto;
+			height: 40px;
+			line-height: 40px;
+			background: none;
+			border: none;
+			border-radius: 4px;
+			padding: 0 0 0 56px;
+			margin: 0;
+			font-weight: bold;
+			user-select: none;
+		}
+
+		wcs-menu-account > svg {
+			display: block;
+			position: absolute;
+			left: 32px;
+			top: 50%;
+			padding: 0;
+			margin: 0;
+			transform: translate(-50%, -50%);
+		}
+
+		wcs-menu .wcs-menu-button {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			width: 32px;
+			height: 32px;
+			background: none;
+			border: none;
+			border-radius: 4px;
+			padding: 0;
+			margin: 0;
+		}
+
+		wcs-menu .wcs-menu-button > svg {
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			padding: 0;
+			margin: 0;
+			transform: translate(-50%, -50%);
+		}
+
+		wcs-menu .wcs-menu-button:enabled {
+			color: inherit;
+			cursor: pointer;
+		}
+
+		wcs-menu .wcs-menu-button:enabled:hover {
+			background-color: rgba(128, 128, 128, 0.1);
+		}
+
+		wcs-menu .wcs-menu-button:enabled:focus {
+			outline: #53617a solid 1.5px;
+			outline-offset: -1.5px;
+		}
+
+		wcs-menu .wcs-menu-item {
+			position: relative;
+			height: 32px;
+			background: none;
+			border: none;
+			border-radius: 4px;
+			font-family: inherit;
+			font-size: 18px;
+			line-height: 32px;
+			padding: 0 0 0 56px;
+			text-align: left;
+			margin: 4px 0 4px 0;
+		}
+
+		wcs-menu .wcs-menu-item:enabled {
+			color: inherit;
+			cursor: pointer;
+		}
+
+		wcs-menu .wcs-menu-item > svg {
+			display: block;
+			position: absolute;
+			left: 32px;
+			top: 50%;
+			padding: 0;
+			margin: 0;
+			transform: translate(-50%, -50%);
+		}
+
+		wcs-menu .wcs-menu-item:enabled:hover {
+			background-color: rgba(128, 128, 128, 0.1);
+		}
+
+		wcs-menu .wcs-menu-item:enabled:focus {
+			outline: #53617a solid 1.5px;
+			outline-offset: -1.5px;
+		}
+
+		wcs-menu .wcs-menu-item:disabled {
+			opacity: 0.5;
+			cursor: auto;
+		}
+
+		wcs-menu wcs-menu-spacer {
+			display: inline-block;
+			width: 100%;
+			background: none;
+			border: none;
+			padding: 0;
+			margin: 0;
+			flex-grow: 1;
+		}
+
+		wcs-menu wcs-menu-separator {
+			display: inline-block;
+			width: 100%;
+			height: 1px;
+			background: #ccc;
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		wcs-menu-blocker {
+			display: none;
+			position: absolute;
+			box-sizing: border-box;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background: #000000;
+			z-index: 200;
+			opacity: 0;
+		}
+
+		wcs-menu-blocker.opened {
+			display: block;
+		}
+	</style>
+	<th:block th:replace="common/sign-out::head"></th:block>
+</th:block>
+
+<th:block th:fragment="body">
+	<wcs-menu-blocker></wcs-menu-blocker>
+	<wcs-menu>
+		<wcs-menu-account>
+			<th:block th:replace="image/account"></th:block>
+			<span>Account1</span>
+		</wcs-menu-account>
+		<button class="wcs-menu-button close">
+			<th:block th:replace="image/close"></th:block>
+		</button>
+		<button class="wcs-menu-item table" url="./table" disabled="disabled">
+			<th:block th:replace="image/table"></th:block>
+			<span th:text="#{top.menu.table}">Table</span>
+		</button>
+		<button class="wcs-menu-item diagram" url="./diagram">
+			<th:block th:replace="image/diagram"></th:block>
+			<span th:text="#{top.menu.diagram}">Diagram</span>
+		</button>
+		<button class="wcs-menu-item chart" url="./chart" disabled="disabled">
+			<th:block th:replace="image/chart"></th:block>
+			<span th:text="#{top.menu.chart}">Chart</span>
+		</button>
+		<button class="wcs-menu-item alert" url="./alert" disabled="disabled">
+			<th:block th:replace="image/alert"></th:block>
+			<span th:text="#{top.menu.alert}">Alert</span>
+		</button>
+		<button class="wcs-menu-item settings" url="./setting" disabled="disabled">
+			<th:block th:replace="image/settings"></th:block>
+			<span th:text="#{top.menu.settings}">Settings</span>
+		</button>
+		<wcs-menu-spacer></wcs-menu-spacer>
+		<button class="wcs-menu-item sign-out" url="./signout">
+			<th:block th:replace="image/sign-out"></th:block>
+			<span th:text="#{top.menu.sign-out}">Sign Out</span>
+		</button>
+	</wcs-menu>
+	<th:block th:replace="common/sign-out::body"></th:block>
+</th:block>

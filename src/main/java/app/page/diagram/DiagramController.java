@@ -1,10 +1,10 @@
-package app.page.top;
+package app.page.diagram;
 
 import org.wcardinal.controller.annotation.Callable;
 import org.wcardinal.controller.annotation.Controller;
 
 @Controller
-public class TopController {
+public class DiagramController {
 	@Callable
 	String hello() {
 		return "Hello, World";

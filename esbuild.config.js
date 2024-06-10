@@ -58,7 +58,7 @@ const toMtime = async (file) => {
 const copy = async (module, webjarDir) => {
 	const source = module[0];
 	const destination = module[1];
-	const sfile = `build/tmp/esbuild/${path.basename(source)}.js`;
+	const sfile = `build/tmp/esbuild/${source}.js`;
 	const dfile1 = `${webjarDir}${destination}.min.js`;
 	const dfile2 = `${OUTPUT_DIR}${destination}.min.js`;
 	const mtimes = await Promise.all([toMtime(sfile), toMtime(dfile1)]);

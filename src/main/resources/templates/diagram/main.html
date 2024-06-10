@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{diagram.label}">
+<head>
+	<th:block th:insert="common/header"></th:block>
+	<th:block th:insert="common/banner::head (${title})"></th:block>
+</head>
+<body>
+	<th:block th:insert="common/banner::body (${title})"></th:block>
+	<th:block th:insert="common/csrf"></th:block>
+	<script th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}"></script>
+	<script th:src="@{/diagram-controller}"></script>
+	<script th:src="@{/webjars/pixi.js/pixi.min.js}"></script>
+	<script th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}"></script>
+	<script th:src="@{|/webjars/wcardinal-ui/wcardinal-ui-theme-white-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}"></script>
+	<script th:src="@{|/asset/message-script/${product.version}/message-script-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}"></script>
+	<script th:src="@{/webjars/wcardinal-starter/wcs-diagram.min.js}"></script>
+	<script th:inline="javascript">
+	(function(){
+		"use strict";
+		new wcs.Main({
+			controller: diagramController,
+			csrf: window.csrf
+		});
+	}());
+	</script>
+</body>
+</html>

@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html>
 <th:block th:fragment="head (title)">
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title th:text="${title}"></title>
-	<link href="/image/favicon.ico" type="image/vnd.microsoft.icon" rel="shortcut icon">
-
-	<link th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}">
-	<link th:src="@{/webjars/pixi.js/pixi.min.js}">
-	<link th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}">
-	<link th:src="@{|/webjars/wcardinal-ui/wcardinal-ui-theme-white-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}">
-	<link th:src="@{|/asset/message-script/${product.version}/message-script-${#strings.toLowerCase(#locale.language)}-${#strings.toLowerCase(#locale.country)}.min.js|}">
-
-	<style>
-	html, body {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		background-color: #eeeeee;
-
-		print-color-adjust: exact;
-		-webkit-print-color-adjust: exact;
-	}
-
-	canvas {
-		outline: none;
-	}
-
-	#signout-form {
-		display: none;
-	}
-	</style>
 	<style>
 	/* BANNER */
 	#banner {
@@ -79,10 +45,8 @@
 	}
 	</style>
 </th:block>
+
 <th:block th:fragment="body (title)">
-	<form id="signout-form" th:action="@{/signout}" method="post">
-		<button id="signout-button" type="submit"></button>
-	</form>
 	<div id="banner">
 		<p th:text="${title}"></p>
 	</div>
@@ -110,8 +74,4 @@
 		checker();
 	}());
 	</script>
-	<script th:inline="javascript" th:if="${_csrf != null}">
-	var csrf = /*[( '{"'+${_csrf.headerName}+'":"'+${_csrf.token}+'"}' )]*/undefined;
-	</script>
 </th:block>
-</html>

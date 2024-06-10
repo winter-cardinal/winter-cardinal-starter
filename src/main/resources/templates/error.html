@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html th:with="title=#{error.page-not-found}">
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{error.page-not-found}">
 <head>
+	<th:block th:insert="common/header"></th:block>
 	<style>
 	#back-to-top {
 		position: absolute;
@@ -32,10 +33,10 @@
 		background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'%23cccccc'%20width%3D'24px'%20height%3D'24px'%3E%3Cpath%20d%3D'M0%200h24v24H0z'%20fill%3D'none'%2F%3E%3Cpath%20d%3D'M20%2011H7.83l5.59-5.59L12%204l-8%208%208%208%201.41-1.41L7.83%2013H20v-2z'%2F%3E%3C%2Fsvg%3E");
 	}
 	</style>
-	<th:block th:insert="common :: head(${title})"></th:block>
+	<th:block th:insert="common/banner::head (${title})"></th:block>
 </head>
 <body>
-	<th:block th:insert="common :: body(${title})"></th:block>
+	<th:block th:insert="common/banner::body (${title})"></th:block>
 	<div id="back-to-top">
 		<a th:href="@{/}"><span></span>Back to Top</a>
 	</div>

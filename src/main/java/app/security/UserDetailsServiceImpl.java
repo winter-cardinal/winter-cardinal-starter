@@ -29,8 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 
 		// TODO: Please remove this account
-		if (username.equals("a")) {
-			return new Account(null, username, passwordEncoder.encode("a"));
+		if (username.equals("Account1")) {
+			return new Account(null, username, passwordEncoder.encode("Account1"));
 		}
 
 		throw new UsernameNotFoundException(username);

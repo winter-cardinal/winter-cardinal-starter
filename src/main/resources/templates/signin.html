@@ -1,33 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=#{signin.sign-in}">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title th:text="#{signin.sign-in}">Sign In</title>
+	<th:block th:insert="common/header"></th:block>
 	<style>
-	html, body {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		background-color: #eeeeee;
-
-		font: 400 18px "Helvetica Neue","Helvetica","Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Arial","Yu Gothic UI","Meiryo UI",sans-serif;
-		line-height: 30px;
-		color: #444;
-
-		overflow: hidden;
-
-		print-color-adjust: exact;
-		-webkit-print-color-adjust: exact;
-	}
-
 	#signin-form {
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		width: 382px;
+		width: 300px;
 		transform: translate( -50%, -50% );
 		border-radius: 4px;
 		padding: 16px;
@@ -44,6 +24,15 @@
 		white-space: nowrap;
 		letter-spacing: 0px;
 		color: #53617a;
+	}
+
+	#signin-form-product .upper {
+		margin: 0;
+		opacity: 0.5;
+	}
+
+	#signin-form-product .lower {
+		margin: 0;
 	}
 
 	#signin-form-username,
@@ -122,14 +111,15 @@
 </head>
 <body>
 	<form id="signin-form" th:action="@{/signin}" method="post">
-		<p id="signin-form-product">
-			<span class="name" th:text="#{product.label}"></span>
-		</p>
+		<div id="signin-form-product">
+			<p class="upper" th:text="#{product.label.upper}"></p>
+			<p class="lower" th:text="#{product.label.lower}"></p>
+		</div>
 		<div id="signin-form-error" th:if="${message} != null">
 			<p th:text="${message}">Invalid Username or Password</p>
 		</div>
-		<input id="signin-form-username" type="text" name="username" th:placeholder="#{signin.username}" required="" autofocus="">
-		<input id="signin-form-password" type="password" name="password" th:placeholder="#{signin.password}" required="">
+		<input id="signin-form-username" type="text" name="username" th:placeholder="#{signin.username}" required="" autofocus="" value="Account1">
+		<input id="signin-form-password" type="password" name="password" th:placeholder="#{signin.password}" required="" value="Account1">
 		<button id="signin-button" type="submit" th:text="#{signin.sign-in}">Sign In</button>
 	</form>
 </body>

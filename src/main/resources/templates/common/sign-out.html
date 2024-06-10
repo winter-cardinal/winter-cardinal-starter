@@ -1,0 +1,13 @@
+<th:block th:fragment="head">
+	<style>
+	#signout-form {
+		display: none;
+	}
+	</style>
+</th:block>
+
+<th:block th:fragment="body">
+	<form id="signout-form" th:action="@{/signout}" method="post">
+		<button id="signout-button" type="submit"></button>
+	</form>
+</th:block>
