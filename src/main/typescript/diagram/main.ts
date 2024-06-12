@@ -1,4 +1,12 @@
-import { DApplication, DDiagram } from "@wcardinal/wcardinal-ui";
+import {
+	DApplication,
+	DButton,
+	DButtonAmbient,
+	DDiagram,
+	DLayoutHorizontal
+} from "@wcardinal/wcardinal-ui";
+import { atlas } from "./atlas";
+import { util } from "@wcardinal/wcardinal";
 
 export interface DiagramController {
 	hello(): Promise<string>;
@@ -10,22 +18,138 @@ export interface MainOptions {
 }
 
 export class Main {
+	protected _diagram?: DDiagram;
+	protected _layoutButtonView?: DLayoutHorizontal;
+	protected _buttonViewZoomOut?: DButton<string>;
+	protected _buttonViewZoomIn?: DButton<string>;
+	protected _buttonViewReset?: DButton<string>;
+	protected _buttonViewFit?: DButton<string>;
+
 	constructor(options: MainOptions) {
 		const application = new DApplication();
-
-		const diagram = new DDiagram({
-			parent: application.stage,
-			x: 0,
-			y: 0,
-			width: "100%",
-			height: "100%"
-		});
-
+		const diagram = this.diagram;
+		application.stage.addChild(diagram);
+		application.stage.addChild(this.layoutButtonView);
 		fetch("./asset/diagram/button-group.json").then((response) => {
 			response.json().then((json) => {
 				diagram.set(json);
 				diagram.view.fit();
 			});
+		});
+	}
+
+	protected get diagram(): DDiagram {
+		return (this._diagram ??= this.newDiagram());
+	}
+
+	protected newDiagram(): DDiagram {
+		return new DDiagram({
+			x: 0,
+			y: 0,
+			width: "100%",
+			height: "100%"
+		});
+	}
+
+	protected get layoutButtonView(): DLayoutHorizontal {
+		return (this._layoutButtonView ??= this.newLayoutButtonView());
+	}
+
+	protected newLayoutButtonView(): DLayoutHorizontal {
+		const position = (p: number, s: number) => p - s - 16;
+		return new DLayoutHorizontal({
+			x: position,
+			y: position,
+			width: "auto",
+			height: "auto",
+			margin: 8,
+			children: [
+				this.buttonViewZoomOut,
+				this.buttonViewZoomIn,
+				this.buttonViewReset,
+				this.buttonViewFit
+			]
+		});
+	}
+
+	protected get buttonViewZoomOut(): DButton<string> {
+		return (this._buttonViewZoomOut ??= this.newButtonViewZoomOut());
+	}
+
+	protected newButtonViewZoomOut(): DButton<string> {
+		return new DButtonAmbient<string>({
+			width: 30,
+			image: {
+				source: atlas.mappings.zoom_out
+			},
+			title: util.messageSource.get("diagram.zoom-out"),
+			shortcut: "Ctrl+Alt+Minus",
+			on: {
+				active: (): void => {
+					this.diagram.view.zoomOut();
+				}
+			}
+		});
+	}
+
+	protected get buttonViewZoomIn(): DButton<string> {
+		return (this._buttonViewZoomIn ??= this.newButtonViewZoomIn());
+	}
+
+	protected newButtonViewZoomIn(): DButton<string> {
+		return new DButtonAmbient<string>({
+			width: 30,
+			image: {
+				source: atlas.mappings.zoom_in
+			},
+			title: util.messageSource.get("diagram.zoom-in"),
+			shortcut: "Ctrl+Alt+Plus",
+			shortcuts: ["Ctrl+Alt+;", "Ctrl+Alt+Shift+Plus"],
+			on: {
+				active: (): void => {
+					this.diagram.view.zoomIn();
+				}
+			}
+		});
+	}
+
+	protected get buttonViewReset(): DButton<string> {
+		return (this._buttonViewReset ??= this.newButtonViewReset());
+	}
+
+	protected newButtonViewReset(): DButton<string> {
+		return new DButtonAmbient<string>({
+			width: 30,
+			image: {
+				source: atlas.mappings.reset_viewport
+			},
+			title: util.messageSource.get("diagram.reset-viewport"),
+			shortcut: "Ctrl+Alt+R",
+			on: {
+				active: (): void => {
+					this.diagram.view.reset();
+				}
+			}
+		});
+	}
+
+	protected get buttonViewFit(): DButton<string> {
+		return (this._buttonViewFit ??= this.newButtonViewFit());
+	}
+
+	protected newButtonViewFit(): DButton<string> {
+		return new DButtonAmbient<string>({
+			width: 30,
+			image: {
+				source: atlas.mappings.fit_viewport
+			},
+			title: util.messageSource.get("diagram.fit-viewport"),
+			shortcut: "Ctrl+Alt+F",
+			on: {
+				active: (): void => {
+					this.diagram.view.fit();
+				}
+			}
 		});
 	}
 }
