@@ -96,3 +96,11 @@ https-proxy=http://proxy-host:proxy-port/
 noproxy[]=no-proxy-host-a
 noproxy[]=no-proxy-host-b
 ```
+
+## License
+
+* Apache License Version 2.0.
+
+* Icons are from Material design icons developed by Google and licensed under Apache license version 2.0.\
+https://github.com/google/material-design-icons
+

@@ -52,7 +52,6 @@ const newBanner = (title, version) => {
 	return (
 		`/*\n` +
 		` ${title} v${version}\n` +
-		` Copyright (C) TOSHIBA Coorporation\n` +
 		`*/`
 	);
 };
