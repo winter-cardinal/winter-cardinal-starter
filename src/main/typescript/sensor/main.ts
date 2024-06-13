@@ -14,16 +14,16 @@ import {
 } from "@wcardinal/wcardinal-ui";
 import { util } from "@wcardinal/wcardinal";
 import { atlas } from "./atlas";
-import { CrudController } from "./crud-controller";
+import { SensorController } from "../wcc/sensor-controller";
 import { Filter } from "./filter";
-import { Sensor, SensorNew, SensorOld } from "./sensor";
+import { Sensor, SensorNew, SensorOld } from "../db/sensor";
 
 export interface MainOptions {
-	controller: CrudController;
+	controller: SensorController;
 }
 
 export class Main {
-	protected _controller: CrudController;
+	protected _controller: SensorController;
 	protected _application: DApplication;
 	protected _isChanged: boolean;
 
@@ -114,7 +114,7 @@ export class Main {
 		return [
 			{
 				type: "TEXT",
-				label: util.messageSource.get("crud.column.name"),
+				label: util.messageSource.get("sensor.column.name"),
 				editable: true,
 				sortable: true,
 				weight: 1,
@@ -128,7 +128,7 @@ export class Main {
 			},
 			{
 				type: "INTEGER",
-				label: util.messageSource.get("crud.column.value"),
+				label: util.messageSource.get("sensor.column.value"),
 				editable: true,
 				sortable: true,
 				weight: 1,
@@ -142,7 +142,7 @@ export class Main {
 			},
 			{
 				type: "CHECK",
-				label: util.messageSource.get("crud.column.delete"),
+				label: util.messageSource.get("sensor.column.delete"),
 				editable: true,
 				sortable: true,
 				width: 100,
@@ -207,7 +207,7 @@ export class Main {
 			image: {
 				source: atlas.mappings.new
 			},
-			title: util.messageSource.get("crud.new"),
+			title: util.messageSource.get("sensor.new"),
 			shortcut: "Ctrl+M",
 			on: {
 				active: (emitter): void => {
@@ -230,7 +230,7 @@ export class Main {
 			image: {
 				source: atlas.mappings.reload
 			},
-			title: util.messageSource.get("crud.reload"),
+			title: util.messageSource.get("sensor.reload"),
 			shortcut: "Ctrl+R",
 			on: {
 				active: (opener): void => {
@@ -271,7 +271,7 @@ export class Main {
 			image: {
 				source: atlas.mappings.save
 			},
-			title: util.messageSource.get("crud.save"),
+			title: util.messageSource.get("sensor.save"),
 			shortcut: "Ctrl+S",
 			on: {
 				active: (emitter): void => {

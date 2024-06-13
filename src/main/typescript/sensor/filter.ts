@@ -1,5 +1,5 @@
 import { DTable, DTableDataFilterObject } from "@wcardinal/wcardinal-ui";
-import { Sensor } from "./sensor";
+import { Sensor } from "../db/sensor";
 
 export class Filter implements DTableDataFilterObject<Sensor> {
 	protected _word: string;

@@ -1,4 +1,4 @@
-package app.page.crud;
+package app.wcc;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class CrudController {
+public class SensorController {
 	private final SensorService sensorService;
 
 	@Callable

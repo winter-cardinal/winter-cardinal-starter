@@ -1,6 +1,6 @@
-import { Sensor } from "./sensor";
+import { Sensor } from "../db/sensor";
 
-export interface CrudController {
+export interface SensorController {
 	findAll(): Promise<Sensor[]>;
 	saveAll(updateds: Sensor[], deleteds: number[]): Promise<number[]>;
 }

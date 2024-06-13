@@ -5,12 +5,9 @@ import {
 	DDiagram,
 	DLayoutHorizontal
 } from "@wcardinal/wcardinal-ui";
-import { atlas } from "./atlas";
 import { util } from "@wcardinal/wcardinal";
-
-export interface DiagramController {
-	hello(): Promise<string>;
-}
+import { atlas } from "./atlas";
+import { DiagramController } from "../wcc/diagram-controller";
 
 export interface MainOptions {
 	controller: DiagramController;
