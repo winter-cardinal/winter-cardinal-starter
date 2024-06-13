@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MvcDiagramController {
 	@GetMapping("/diagram")
-	public String diagram() {
+	public String main() {
 		return "diagram/main";
 	}
 }

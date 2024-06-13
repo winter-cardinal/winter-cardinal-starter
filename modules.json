@@ -1,5 +1,6 @@
 [
 	["top/main", "wcs-top", "wcs"],
 	["empty/main", "wcs-empty", "wcs"],
+	["crud/main", "wcs-crud", "wcs"],
 	["diagram/main", "wcs-diagram", "wcs"]
 ]
