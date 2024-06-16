@@ -1,7 +1,6 @@
 package app.security;
 
 import java.util.concurrent.TimeUnit;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
@@ -35,24 +34,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		final var matcherStatic = new OrRequestMatcher(
-			new AntPathRequestMatcher("/webjars/**"),
-			new AntPathRequestMatcher("/asset/**"),
-			new AntPathRequestMatcher("/image/**")
-		);
-		final var matcherNonStatic = new NegatedRequestMatcher(
-			matcherStatic
-		);
+				new AntPathRequestMatcher("/webjars/**"),
+				new AntPathRequestMatcher("/asset/**"),
+				new AntPathRequestMatcher("/image/**"));
+		final var matcherNonStatic = new NegatedRequestMatcher(matcherStatic);
 		final var cacheControlHeaderStatic = new DelegatingRequestMatcherHeaderWriter(
-			matcherStatic,
-			new StaticHeadersWriter(
-				HttpHeaders.CACHE_CONTROL,
-				CacheControl.maxAge(10, TimeUnit.MINUTES).getHeaderValue()
-			)
-		);
-		final var cacheControlHeaderNonStatic = new DelegatingRequestMatcherHeaderWriter(
-			matcherNonStatic,
-			new CacheControlHeadersWriter()
-		);
+				matcherStatic,
+				new StaticHeadersWriter(
+						HttpHeaders.CACHE_CONTROL,
+						CacheControl.maxAge(10, TimeUnit.MINUTES).getHeaderValue()));
+		final var cacheControlHeaderNonStatic =
+				new DelegatingRequestMatcherHeaderWriter(matcherNonStatic, new CacheControlHeadersWriter());
+		// spotless:off
 		http
 		.headers()
 			.frameOptions()
@@ -76,5 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutUrl("/signout")
 			.logoutSuccessUrl("/signin")
 				.permitAll();
+		// spotless:on
 	}
 }

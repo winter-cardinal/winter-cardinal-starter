@@ -1,10 +1,10 @@
 plugins {
+	id 'java'
+	id 'eclipse'
 	id 'org.springframework.boot' version '2.6.3'
-	id "io.freefair.lombok" version "6.4.3"
+	id 'io.freefair.lombok' version '6.4.3'
+	id 'com.diffplug.spotless' version '6.25.0'
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
 
 // GENERAL
 def packageJson = new groovy.json.JsonSlurper().parseText(file('package.json').text);
@@ -37,6 +37,16 @@ jar {
 // SPRING BOOT
 springBoot {
 	mainClass = 'app.Main'
+}
+
+// SPOTLESS
+spotless {
+	java {
+		palantirJavaFormat()
+		indentWithTabs()
+		lineEndings 'UNIX'
+		toggleOffOn()
+	}
 }
 
 // DEPENDENCIES

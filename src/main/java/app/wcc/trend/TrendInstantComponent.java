@@ -1,16 +1,15 @@
 package app.wcc.trend;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.wcardinal.controller.AbstractController;
 import org.wcardinal.controller.annotation.Component;
 import org.wcardinal.controller.annotation.OnChange;
 import org.wcardinal.controller.annotation.OnTime;
 import org.wcardinal.controller.data.SClass;
-import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
@@ -32,7 +31,7 @@ public class TrendInstantComponent extends AbstractController {
 	@OnTime
 	protected void send(final Map<String, TrendInstantValue> values) {
 		final var now = System.currentTimeMillis();
-		for (final var value: values.values()) {
+		for (final var value : values.values()) {
 			value.update(now);
 		}
 		this.triggerDirect("update", values);

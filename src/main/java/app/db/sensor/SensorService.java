@@ -1,11 +1,9 @@
 package app.db.sensor;
 
-import java.util.List;
 import java.util.Collections;
-
-import org.springframework.stereotype.Service;
-
+import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +19,9 @@ public class SensorService {
 			sensorRepository.deleteAllByIdIn(deleteds);
 		}
 		if (!updateds.isEmpty()) {
-			return sensorRepository.saveAll(updateds).stream().map((sensor) -> sensor.getId()).toList();
+			return sensorRepository.saveAll(updateds).stream()
+					.map((sensor) -> sensor.getId())
+					.toList();
 		}
 		return Collections.emptyList();
 	}

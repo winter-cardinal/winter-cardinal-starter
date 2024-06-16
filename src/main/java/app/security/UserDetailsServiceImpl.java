@@ -1,13 +1,12 @@
 package app.security;
 
+import app.db.account.Account;
+import app.db.account.AccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import app.db.account.Account;
-import app.db.account.AccountService;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

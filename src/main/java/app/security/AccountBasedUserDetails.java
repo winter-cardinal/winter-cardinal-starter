@@ -1,20 +1,18 @@
 package app.security;
 
+import app.db.account.Account;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import app.db.account.Account;
 
 public class AccountBasedUserDetails implements UserDetails {
 	protected static final long serialVersionUID = -719288489123L;
 	protected final Account account;
 	protected final List<GrantedAuthority> authorities;
 
-	AccountBasedUserDetails( Account account ) {
+	AccountBasedUserDetails(Account account) {
 		this.account = account;
 		this.authorities = new ArrayList<>();
 	}

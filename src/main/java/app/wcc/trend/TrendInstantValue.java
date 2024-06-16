@@ -1,7 +1,6 @@
 package app.wcc.trend;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

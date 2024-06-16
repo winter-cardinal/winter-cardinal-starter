@@ -2,7 +2,6 @@ package app.i18n;
 
 import java.util.HashSet;
 import java.util.Locale;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,7 @@ import org.wcardinal.util.message.ExposableReloadableResourceBundleMessageSource
 @Configuration
 public class MessageSourceConfig {
 	@Bean
-	public LocaleResolver localeResolver(){
+	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(getDefaultLocale());
 	}
 
@@ -35,7 +34,8 @@ public class MessageSourceConfig {
 	private String[] getMessageSourceBasenames() {
 		final var basenames = new HashSet<String>();
 		try {
-			for (final var resource: ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader()).getResources("classpath*:/i18n/**/*.properties")) {
+			for (final var resource : ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader())
+					.getResources("classpath*:/i18n/**/*.properties")) {
 				final var url = resource.getURL().toExternalForm();
 				final var index0 = url.indexOf("/i18n/");
 				final var index1 = url.lastIndexOf("_");
