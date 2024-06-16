@@ -25,7 +25,7 @@ export class Filter implements DTableDataFilterObject<Sensor> {
 		return this._table;
 	}
 
-	set table(table: DTable<Sensor>) {
+	set table(table: DTable<Sensor> | null) {
 		if (this._table !== table) {
 			this._table = table;
 			this.onWordChange(this._word);

@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.authorizeRequests()
 			.requestMatchers(matcherStatic)
-				.permitAll()
+				.authenticated()
 			.anyRequest()
 				.authenticated()
 			.and()

@@ -1,6 +1,5 @@
 package app.db.sensor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,7 +33,5 @@ public class Sensor {
 	@NotNull
 	private String name;
 
-	@NotNull
-	@Column(name="value_")
-	private double value;
+	private long color;
 }

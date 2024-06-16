@@ -1,7 +1,7 @@
 export interface Sensor {
 	id?: number;
 	name: string;
-	value: number;
+	color: number;
 }
 
 export interface SensorNew {

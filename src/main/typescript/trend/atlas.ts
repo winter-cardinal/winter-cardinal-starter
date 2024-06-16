@@ -42,3 +42,21 @@ atlas.add(
 		`<path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z"/>` +
 		`</g>`
 );
+
+atlas.add(
+	"play",
+	24,
+	24,
+	`<g fill="#fff" transform="scale(0.025, 0.025) translate(0, 960)">` +
+		`<path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/>` +
+		`</g>`
+);
+
+atlas.add(
+	"pause",
+	24,
+	24,
+	`<g fill="#fff" transform="scale(0.025, 0.025) translate(0, 960)">` +
+		`<path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z"/>` +
+		`</g>`
+);

@@ -2,6 +2,7 @@ import {
 	DApplication,
 	DButton,
 	DButtonAmbient,
+	DColorAndAlpha,
 	DDialogConfirmDiscard,
 	DDialogOpener,
 	DDialogProcessing,
@@ -10,7 +11,8 @@ import {
 	DLayoutHorizontal,
 	DLayoutVertical,
 	DTable,
-	DTableColumnOptions
+	DTableColumnOptions,
+	UtilRgb
 } from "@wcardinal/wcardinal-ui";
 import { util } from "@wcardinal/wcardinal";
 import { atlas } from "./atlas";
@@ -55,7 +57,6 @@ export class Main {
 				x: "center",
 				y: "center",
 				width: (p, s, padding) => {
-					console.log(p, s, padding);
 					return Math.min(p - padding, 1200);
 				},
 				height: "padding",
@@ -127,17 +128,20 @@ export class Main {
 				}
 			},
 			{
-				type: "INTEGER",
-				label: util.messageSource.get("sensor.column.value"),
+				type: "COLOR",
+				label: util.messageSource.get("sensor.column.color"),
 				editable: true,
 				sortable: true,
 				weight: 1,
 				getter: (sensor: Sensor): number => {
-					return sensor.value;
+					return sensor.color;
 				},
-				setter: (sensor: Sensor, index: number, value: number): void => {
-					sensor.value = value;
+				setter: (sensor: Sensor, index: number, value: DColorAndAlpha): void => {
+					sensor.color = value.color;
 					this.toSensorUpdated(sensor);
+				},
+				formatter: (value: DColorAndAlpha) => {
+					return `#${UtilRgb.toCode(value.color)}`;
 				}
 			},
 			{
@@ -362,7 +366,7 @@ export class Main {
 		return {
 			id: undefined,
 			name: this.newSensorName(),
-			value: 0
+			color: 0x53617a
 		};
 	}
 
