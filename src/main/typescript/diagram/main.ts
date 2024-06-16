@@ -53,13 +53,15 @@ export class Main {
 	}
 
 	protected newLayoutButtonView(): DLayoutHorizontal {
-		const position = (p: number, s: number) => p - s - 16;
 		return new DLayoutHorizontal({
-			x: position,
-			y: position,
+			x: (p, s) => p - s - 8,
+			y: (p, s) => p - s - 8,
 			width: "auto",
 			height: "auto",
 			margin: 8,
+			background: {
+				color: 0xffffff
+			},
 			children: [
 				this.buttonViewZoomOut,
 				this.buttonViewZoomIn,
