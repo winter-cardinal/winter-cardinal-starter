@@ -2,6 +2,7 @@ import {
 	DApplication,
 	DBaseState,
 	DButton,
+	DButtonAmbient,
 	DButtonGroup,
 	DChart,
 	DChartAxisXDatetime,
@@ -57,16 +58,7 @@ export class Main {
 		});
 		this._application = application;
 
-		application.stage.addChild(
-			new DLayoutHorizontal({
-				x: "padding",
-				y: "padding",
-				width: "padding",
-				height: "padding",
-				margin: 8,
-				children: [this.chart, this.legend]
-			})
-		);
+		application.stage.addChild(this.chart);
 
 		const controller = options.controller;
 		this._controller = controller;
@@ -167,14 +159,20 @@ export class Main {
 
 	protected newChart(): DChart {
 		return new DChart({
-			weight: 1,
+			x: "padding",
+			y: "padding",
+			width: "padding",
 			height: "padding",
 			padding: {
-				left: 60,
-				right: 60,
-				bottom: 110
+				top: 0,
+				right: 408,
+				bottom: 110,
+				left: 60
 			},
 			plotArea: {
+				background: {
+					color: 0xffffff
+				},
 				coordinate: {
 					x: new DChartCoordinateLinear(),
 					y: new DChartCoordinateLinear({
@@ -189,7 +187,7 @@ export class Main {
 					list: [new DChartAxisXDatetime(), new DChartAxisY()]
 				}
 			},
-			children: [this.layoutButtonControl, this.layoutButtonView]
+			children: [this.layoutButtonControl, this.layoutButtonView, this.legend]
 		});
 	}
 
@@ -199,8 +197,10 @@ export class Main {
 
 	protected newLegend(): DTable<LegendItem> {
 		return new DTable<LegendItem>({
+			x: (p, s) => p - s,
+			y: 0,
 			width: 400,
-			height: "padding",
+			height: (p) => p - 110,
 			columns: [
 				{
 					type: "TEXT",
@@ -248,7 +248,7 @@ export class Main {
 
 	protected newLayoutButtonControl(): DLayoutHorizontal {
 		return new DLayoutHorizontal({
-			x: "center",
+			x: (p, s) => 60 + (p - 60 - 408 - s) * 0.5,
 			y: (p, s) => p - s,
 			width: "auto",
 			height: "auto",
@@ -371,13 +371,13 @@ export class Main {
 
 	protected newLayoutButtonView(): DLayoutHorizontal {
 		return new DLayoutHorizontal({
-			x: (p, s) => p - s - 60,
-			y: (p, s) => p - s - 30,
+			x: (p, s) => p - s,
+			y: (p, s) => p - s,
 			width: "auto",
 			height: "auto",
-			margin: 0,
-			corner: {
-				adjust: true
+			margin: 8,
+			background: {
+				color: 0xffffff
 			},
 			children: [
 				this.buttonViewZoomOut,
@@ -393,7 +393,7 @@ export class Main {
 	}
 
 	protected newButtonViewZoomOut(): DButton<string> {
-		return new DButton<string>({
+		return new DButtonAmbient<string>({
 			width: 30,
 			image: {
 				source: atlas.mappings.zoom_out
@@ -413,7 +413,7 @@ export class Main {
 	}
 
 	protected newButtonViewZoomIn(): DButton<string> {
-		return new DButton<string>({
+		return new DButtonAmbient<string>({
 			width: 30,
 			image: {
 				source: atlas.mappings.zoom_in
@@ -434,7 +434,7 @@ export class Main {
 	}
 
 	protected newButtonViewReset(): DButton<string> {
-		return new DButton<string>({
+		return new DButtonAmbient<string>({
 			width: 30,
 			image: {
 				source: atlas.mappings.reset_viewport
@@ -454,7 +454,7 @@ export class Main {
 	}
 
 	protected newButtonViewFit(): DButton<string> {
-		return new DButton<string>({
+		return new DButtonAmbient<string>({
 			width: 30,
 			image: {
 				source: atlas.mappings.fit_viewport
