@@ -173,8 +173,8 @@ export class Main {
 				coordinate: {
 					x: new DChartCoordinateLinear(),
 					y: new DChartCoordinateLinear({
-						from: 0,
-						to: 2
+						from: -0.5,
+						to: 1.5
 					})
 				},
 				series: {
