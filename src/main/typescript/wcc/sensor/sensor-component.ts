@@ -1,6 +1,6 @@
-import { Sensor } from "../db/sensor";
+import { Sensor } from "../../db/sensor";
 
-export interface SensorController {
+export interface SensorComponent {
 	findAll(): Promise<Sensor[]>;
 	saveAll(updateds: Sensor[], deleteds: number[]): Promise<number[]>;
 }

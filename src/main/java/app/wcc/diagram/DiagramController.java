@@ -1,18 +1,12 @@
-package app.wcc.trend;
+package app.wcc.diagram;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.wcardinal.controller.annotation.Controller;
 
 import app.wcc.instant.InstantComponent;
-import app.wcc.sensor.SensorComponent;
 
 @Controller
-@RequiredArgsConstructor
-public class TrendController {
+public class DiagramController {
 	@Autowired
 	protected InstantComponent instant;
-
-	@Autowired
-	protected SensorComponent sensor;
 }

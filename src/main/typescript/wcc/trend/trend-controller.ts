@@ -1,7 +1,7 @@
-import { TrendInstantComponent } from "./trend-instant-component";
-import { TrendSensorComponent } from "./trend-sensor-component";
+import { InstantComponent } from "../instant/instant-component";
+import { SensorComponent } from "../sensor/sensor-component";
 
 export interface TrendController {
-	instant: TrendInstantComponent;
-	sensor: TrendSensorComponent;
+	instant: InstantComponent;
+	sensor: SensorComponent;
 }

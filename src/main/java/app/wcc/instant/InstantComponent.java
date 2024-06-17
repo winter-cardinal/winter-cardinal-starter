@@ -1,4 +1,4 @@
-package app.wcc.trend;
+package app.wcc.instant;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,23 +13,23 @@ import org.wcardinal.controller.data.SClass;
 
 @Component
 @RequiredArgsConstructor
-public class TrendInstantComponent extends AbstractController {
+public class InstantComponent extends AbstractController {
 	@Autowired
 	protected SClass<List<String>> sensors;
 
 	@OnChange("sensors")
 	protected void onSensorsChange(final List<String> sensors) {
-		final var values = new HashMap<String, TrendInstantValue>();
+		final var values = new HashMap<String, InstantValue>();
 		for (int i = 0; i < sensors.size(); ++i) {
 			final var sensor = sensors.get(i);
-			values.put(sensor, new TrendInstantValue(0, 0, i));
+			values.put(sensor, new InstantValue(0, 0, i));
 		}
 		this.cancelAll();
 		this.interval("send", 0, 1000, values);
 	}
 
 	@OnTime
-	protected void send(final Map<String, TrendInstantValue> values) {
+	protected void send(final Map<String, InstantValue> values) {
 		final var now = System.currentTimeMillis();
 		for (final var value : values.values()) {
 			value.update(now);

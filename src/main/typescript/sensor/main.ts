@@ -16,7 +16,7 @@ import {
 } from "@wcardinal/wcardinal-ui";
 import { util } from "@wcardinal/wcardinal";
 import { atlas } from "./atlas";
-import { SensorController } from "../wcc/sensor-controller";
+import { SensorController } from "../wcc/sensor/sensor-controller";
 import { Filter } from "./filter";
 import { Sensor, SensorNew, SensorOld } from "../db/sensor";
 
@@ -104,7 +104,7 @@ export class Main {
 			}
 		});
 		filter.table = result;
-		this._controller.findAll().then((sensors: Sensor[]): void => {
+		this._controller.sensor.findAll().then((sensors: Sensor[]): void => {
 			result.data.clearAndAddAll(sensors);
 			this.toClean();
 		});
@@ -253,7 +253,7 @@ export class Main {
 	protected reload(opener?: DDialogOpener): void {
 		const dialogProcessing = this.dialogProcessing;
 		dialogProcessing.open(opener);
-		this._controller.findAll().then(
+		this._controller.sensor.findAll().then(
 			(rows: Sensor[]): void => {
 				this.table.data.clearAndAddAll(rows);
 				this.toClean();
@@ -309,7 +309,7 @@ export class Main {
 		const dialogProcessing = this.dialogProcessing;
 		dialogProcessing.open(opener);
 		if (0 < updateds.length || 0 < deleteds.length) {
-			this._controller.saveAll(updateds, deleteds).then(
+			this._controller.sensor.saveAll(updateds, deleteds).then(
 				(ids: number[]): void => {
 					table.body.lock();
 					for (let i = 0, imax = updateds.length; i < imax; ++i) {

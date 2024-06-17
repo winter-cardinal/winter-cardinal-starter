@@ -1,9 +1,9 @@
 import { Sensor } from "../db/sensor";
-import { TrendInstantValue } from "../wcc/trend/trend-instant-value";
+import { InstantValue } from "../wcc/instant/instant-value";
 
 export class LegendItem {
 	public sensor: Sensor;
-	public value: TrendInstantValue;
+	public value: InstantValue;
 
 	constructor(sensor: Sensor) {
 		this.sensor = sensor;

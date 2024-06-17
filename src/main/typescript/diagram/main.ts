@@ -7,7 +7,8 @@ import {
 } from "@wcardinal/wcardinal-ui";
 import { util } from "@wcardinal/wcardinal";
 import { atlas } from "./atlas";
-import { DiagramController } from "../wcc/diagram-controller";
+import { DiagramController } from "../wcc/diagram/diagram-controller";
+import { InstantValue } from "../wcc/instant/instant-value";
 
 export interface MainOptions {
 	controller: DiagramController;
@@ -15,6 +16,8 @@ export interface MainOptions {
 }
 
 export class Main {
+	protected _application: DApplication;
+	protected _controller: DiagramController;
 	protected _diagram?: DDiagram;
 	protected _layoutButtonView?: DLayoutHorizontal;
 	protected _buttonViewZoomOut?: DButton<string>;
@@ -24,15 +27,26 @@ export class Main {
 
 	constructor(options: MainOptions) {
 		const application = new DApplication();
+		this._application = application;
+
+		const controller = options.controller;
+		this._controller = controller;
+		controller.instant.on("update", (e: unknown, values: Record<string, InstantValue>) => {
+			this.onInstantUpdate(values);
+		});
+
 		const diagram = this.diagram;
 		application.stage.addChild(diagram);
 		application.stage.addChild(this.layoutButtonView);
-		fetch("./asset/diagram/button-group.json").then((response) => {
-			response.json().then((json) => {
-				diagram.set(json);
-				diagram.view.fit();
-			});
-		});
+	}
+
+	protected onInstantUpdate(values: Record<string, InstantValue>): void {
+		const data = this.diagram.data;
+		for (const sensorName in values) {
+			const value = values[sensorName];
+			data.set(sensorName, value.value, value.time);
+		}
+		this._application.update();
 	}
 
 	protected get diagram(): DDiagram {
@@ -40,12 +54,24 @@ export class Main {
 	}
 
 	protected newDiagram(): DDiagram {
-		return new DDiagram({
+		const result = new DDiagram({
 			x: 0,
 			y: 0,
 			width: "100%",
-			height: "100%"
+			height: "100%",
+			on: {
+				ready: () => {
+					result.view.fit();
+					this._controller.instant.sensors.set(result.data.ids);
+				}
+			}
 		});
+		fetch("./asset/diagram/plant.json").then((response) => {
+			response.json().then((json) => {
+				result.set(json);
+			});
+		});
+		return result;
 	}
 
 	protected get layoutButtonView(): DLayoutHorizontal {

@@ -13,7 +13,7 @@ import {
 	DTable
 } from "@wcardinal/wcardinal-ui";
 import { TrendController } from "../wcc/trend/trend-controller";
-import { TrendInstantValue } from "../wcc/trend/trend-instant-value";
+import { InstantValue } from "../wcc/instant/instant-value";
 import { LegendItem } from "./legend-item";
 import { atlas } from "./atlas";
 import { util } from "@wcardinal/wcardinal";
@@ -87,16 +87,13 @@ export class Main {
 			legend.data.clearAndAddAll(legendItems);
 
 			controller.instant.sensors.set(sensorNames);
-			controller.instant.on(
-				"update",
-				(e: unknown, values: Record<string, TrendInstantValue>) => {
-					this.onInstantUpdate(values);
-				}
-			);
+			controller.instant.on("update", (e: unknown, values: Record<string, InstantValue>) => {
+				this.onInstantUpdate(values);
+			});
 		});
 	}
 
-	protected onInstantUpdate(values: Record<string, TrendInstantValue>): void {
+	protected onInstantUpdate(values: Record<string, InstantValue>): void {
 		const pointsCapacity = this._pointsCapacity;
 		if (this._isPlaying) {
 			let isChartDirty = false;
