@@ -1,21 +1,22 @@
 plugins {
-	id 'java'
-	id 'eclipse'
-	id 'org.springframework.boot' version '2.6.3'
-	id 'io.freefair.lombok' version '6.4.3'
-	id 'com.diffplug.spotless' version '6.25.0'
+	id "java"
+	id "eclipse"
+	id "org.springframework.boot" version "2.7.18"
+	id "io.spring.dependency-management" version "1.1.5"
+	id "io.freefair.lombok" version "6.4.3"
+	id "com.diffplug.spotless" version "6.25.0"
 }
 
 // GENERAL
-def packageJson = new groovy.json.JsonSlurper().parseText(file('package.json').text);
+def packageJson = new groovy.json.JsonSlurper().parseText(file("package.json").text);
 def packageName = packageJson.name;
-def slashIndex = packageName.indexOf('/');
+def slashIndex = packageName.indexOf("/");
 if (0 <= slashIndex) {
 	group = packageName.substring(1, slashIndex);
 	archivesBaseName = packageName.substring(slashIndex + 1);
 	version = packageJson.version;
 } else {
-	group = 'com';
+	group = "com";
 	archivesBaseName = packageName;
 	version = packageJson.version;
 }
@@ -36,7 +37,7 @@ jar {
 
 // SPRING BOOT
 springBoot {
-	mainClass = 'app.Main'
+	mainClass = "app.Main"
 }
 
 // SPOTLESS
@@ -44,24 +45,22 @@ spotless {
 	java {
 		palantirJavaFormat()
 		indentWithTabs()
-		lineEndings 'UNIX'
+		lineEndings "UNIX"
 		toggleOffOn()
 	}
 }
 
 // DEPENDENCIES
 dependencies {
-	implementation 'com.github.winter-cardinal:winter-cardinal:1.0.3'
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.3'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.3'
-	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.3'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.3'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket:2.6.3'
-	implementation 'net.java.dev.jna:jna:5.6.0'
-	implementation 'net.java.dev.jna:jna-platform:5.6.0'
-	runtimeOnly 'com.h2database:h2:2.1.210'
-
-	// REQUIRED FOR JAVA 9+
-	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
+	implementation "com.github.winter-cardinal:winter-cardinal:1.0.3"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation "org.springframework.boot:spring-boot-starter-validation"
+	implementation "org.springframework.boot:spring-boot-starter-websocket"
+	implementation "net.java.dev.jna:jna:5.6.0"
+	implementation "net.java.dev.jna:jna-platform:5.6.0"
+	implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+	runtimeOnly "com.h2database:h2:2.1.210"
 }
