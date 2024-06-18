@@ -61,7 +61,7 @@ export class Main {
 			height: "100%",
 			on: {
 				ready: () => {
-					result.view.fit();
+					result.view.reset();
 					this._controller.instant.sensors.set(result.data.ids);
 				}
 			}
