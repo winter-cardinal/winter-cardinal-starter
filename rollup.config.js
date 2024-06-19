@@ -1,8 +1,8 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import terser from '@rollup/plugin-terser';
 import packageJson from './package.json';
 import copy from 'rollup-plugin-copy';
-import { terser } from 'rollup-plugin-terser';
 import * as fse from 'fs-extra';
 import path from 'path';
 import process from 'process';
