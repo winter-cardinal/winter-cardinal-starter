@@ -51,6 +51,34 @@ npm run build:esbuild
 npm run watch:esbuild
 ```
 
+## Linting Java Codes
+
+```
+./gradlew spotlessCheck
+```
+
+or
+
+```
+./gradlew spotlessApply
+```
+
+to fix all the lint errors.
+
+## Linting TypeScript Codes
+
+```
+npm run lint
+```
+
+or
+
+```
+npm run lint:fix
+```
+
+to fix all the auto-fixable lint errors.
+
 ## Proxy
 
 ### Gradle
