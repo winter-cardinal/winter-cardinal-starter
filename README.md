@@ -7,7 +7,7 @@ A starter for WinterCardinal projects.
 1. If you haven't executed `npm install` before, please execute `npm install` to install node modules. `npm install` need to be performed at least once.
 Once `npm install` is executed successfully, it doesn't need to be executed unless the dependencies listed in the `package.json` get changed.
 2. Build TypeScript codes by the command `npm run build`.
-3. Then execute `./gradlew bootRun` to start the web server.
+3. And then, execute `./gradlew bootRun` to start the web server.
 `./gradlew build` followed by `java -jar ./build/libs/${jar-file-name}.jar` works as well.
 
 To stop the web server, please hit the `Ctrl+C`.
@@ -17,7 +17,7 @@ To stop the web server, please hit the `Ctrl+C`.
 1. Type `npm install` to install node modules if they haven't been installed yet.
 2. Build TypeScript codes by the command `npm run build:esbuild`.
 If you want to build incrementally, please type `npm run watch:esbuild` instead.
-3. Then run `src/main/java/Main.java` with your IDE.
+3. And then, run `src/main/java/Main.java` with your IDE.
 
 ## Compiling Java Codes
 
