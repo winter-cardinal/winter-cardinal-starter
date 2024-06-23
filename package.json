@@ -17,7 +17,7 @@
 		"lint:fix": "eslint src/main/typescript --fix"
 	},
 	"dependencies": {
-		"@wcardinal/wcardinal": "^1.0.3",
+		"@wcardinal/wcardinal": "^2.1.0",
 		"@wcardinal/wcardinal-ui": "^0.436.0",
 		"pixi.js": "5.3.12"
 	},

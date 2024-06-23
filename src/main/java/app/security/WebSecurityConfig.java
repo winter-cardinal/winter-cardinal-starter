@@ -40,29 +40,31 @@ public class WebSecurityConfig {
 		final var cacheControlHeaderNonStatic =
 				new DelegatingRequestMatcherHeaderWriter(matcherNonStatic, new CacheControlHeadersWriter());
 		// spotless:off
-		http
-		.headers()
-			.frameOptions()
-				.sameOrigin()
-			.cacheControl()
-				.disable()
-				.addHeaderWriter(cacheControlHeaderStatic)
-				.addHeaderWriter(cacheControlHeaderNonStatic)
-			.and()
-		.authorizeRequests()
-			.requestMatchers(matcherStatic)
+		http.headers(headers ->
+			headers.frameOptions(options ->
+				options.sameOrigin()
+			)
+			.cacheControl(control ->
+				control.disable()
+					.addHeaderWriter(cacheControlHeaderStatic)
+					.addHeaderWriter(cacheControlHeaderNonStatic)
+			)
+		)
+		.authorizeHttpRequests(requests ->
+			requests.requestMatchers(matcherStatic)
 				.authenticated()
-			.anyRequest()
+				.anyRequest()
 				.authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/signin")
+		)
+		.formLogin(login ->
+			login.loginPage("/signin")
 				.permitAll()
-			.and()
-		.logout()
-			.logoutUrl("/signout")
-			.logoutSuccessUrl("/signin")
-				.permitAll();
+		)
+		.logout(logout ->
+			logout.logoutUrl("/signout")
+				.logoutSuccessUrl("/signin")
+				.permitAll()
+		);
 		// spotless:on
 		return http.build();
 	}

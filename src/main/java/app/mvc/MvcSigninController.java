@@ -1,8 +1,8 @@
 package app.mvc;
 
 import app.i18n.MessageService;
+import jakarta.servlet.http.HttpSession;
 import java.util.Locale;
-import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;

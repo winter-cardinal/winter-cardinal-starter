@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="title=#{top.label}">
 <head>
-	<th:block th:insert="common/header"></th:block>
+	<th:block th:insert="~{common/header}"></th:block>
 	<style>
 		wcs-top-header {
 			display: block;
@@ -111,12 +111,12 @@
 			margin: 0;
 		}
 	</style>
-	<th:block th:replace="top/menu::head"></th:block>
+	<th:block th:replace="~{top/menu::head}"></th:block>
 </head>
 <body>
 	<wcs-top-header>
 		<button class="wcs-top-header-button menu">
-			<th:block th:replace="image/menu"></th:block>
+			<th:block th:replace="~{image/menu}"></th:block>
 		</button>
 		<wcs-top-header-label>WinterCardinal Starter</wcs-top-header-label>
 		<wcs-top-header-clock>0000/00/00 00:00:00</wcs-top-header-clock>
@@ -124,7 +124,7 @@
 	<wcs-top-body>
 		<iframe th:src="@{/empty}"></iframe>
 	</wcs-top-body>
-	<th:block th:replace="top/menu::body"></th:block>
+	<th:block th:replace="~{top/menu::body}"></th:block>
 	<script th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}"></script>
 	<script th:src="@{/webjars/pixi.js/pixi.min.js}"></script>
 	<script th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}"></script>

@@ -171,44 +171,44 @@
 			display: block;
 		}
 	</style>
-	<th:block th:replace="common/sign-out::head"></th:block>
+	<th:block th:replace="~{common/sign-out::head}"></th:block>
 </th:block>
 
 <th:block th:fragment="body">
 	<wcs-menu-blocker></wcs-menu-blocker>
 	<wcs-menu>
 		<wcs-menu-account>
-			<th:block th:replace="image/account"></th:block>
+			<th:block th:replace="~{image/account}"></th:block>
 			<span>Account1</span>
 		</wcs-menu-account>
 		<button class="wcs-menu-button close">
-			<th:block th:replace="image/close"></th:block>
+			<th:block th:replace="~{image/close}"></th:block>
 		</button>
 		<button class="wcs-menu-item sensor" url="./sensor">
-			<th:block th:replace="image/sensor"></th:block>
+			<th:block th:replace="~{image/sensor}"></th:block>
 			<span th:text="#{top.menu.sensor}">Sensor</span>
 		</button>
 		<button class="wcs-menu-item diagram" url="./diagram">
-			<th:block th:replace="image/diagram"></th:block>
+			<th:block th:replace="~{image/diagram}"></th:block>
 			<span th:text="#{top.menu.diagram}">Diagram</span>
 		</button>
 		<button class="wcs-menu-item trend" url="./trend">
-			<th:block th:replace="image/trend"></th:block>
+			<th:block th:replace="~{image/trend}"></th:block>
 			<span th:text="#{top.menu.trend}">Trend</span>
 		</button>
 		<button class="wcs-menu-item alert" url="./alert" disabled="disabled">
-			<th:block th:replace="image/alert"></th:block>
+			<th:block th:replace="~{image/alert}"></th:block>
 			<span th:text="#{top.menu.alert}">Alert</span>
 		</button>
 		<button class="wcs-menu-item settings" url="./setting" disabled="disabled">
-			<th:block th:replace="image/settings"></th:block>
+			<th:block th:replace="~{image/settings}"></th:block>
 			<span th:text="#{top.menu.settings}">Settings</span>
 		</button>
 		<wcs-menu-spacer></wcs-menu-spacer>
 		<button class="wcs-menu-item sign-out" url="./signout">
-			<th:block th:replace="image/sign-out"></th:block>
+			<th:block th:replace="~{image/sign-out}"></th:block>
 			<span th:text="#{top.menu.sign-out}">Sign Out</span>
 		</button>
 	</wcs-menu>
-	<th:block th:replace="common/sign-out::body"></th:block>
+	<th:block th:replace="~{common/sign-out::body}"></th:block>
 </th:block>

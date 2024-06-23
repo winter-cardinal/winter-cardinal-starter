@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="title=''">
 <head>
-	<th:block th:insert="common/header"></th:block>
-	<th:block th:insert="common/background::head"></th:block>
+	<th:block th:insert="~{common/header}"></th:block>
+	<th:block th:insert="~{common/background::head}"></th:block>
 </head>
 <body>
-	<th:block th:insert="common/background::body"></th:block>
+	<th:block th:insert="~{common/background::body}"></th:block>
 	<script th:src="@{/webjars/wcardinal/wcardinal.worker.min.js}"></script>
 	<script th:src="@{/webjars/pixi.js/pixi.min.js}"></script>
 	<script th:src="@{/webjars/wcardinal-ui/wcardinal-ui.min.js}"></script>
