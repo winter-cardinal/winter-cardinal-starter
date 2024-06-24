@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
 import org.springframework.security.web.header.writers.DelegatingRequestMatcherHeaderWriter;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -31,14 +32,16 @@ public class WebSecurityConfig {
 				new AntPathRequestMatcher("/webjars/**"),
 				new AntPathRequestMatcher("/asset/**"),
 				new AntPathRequestMatcher("/image/**"));
-		final var matcherNonStatic = new NegatedRequestMatcher(matcherStatic);
+		final var matcherNotStatic = new NegatedRequestMatcher(matcherStatic);
+		final var matcherStaticFavicon = new AntPathRequestMatcher("/asset/favicon/**");
+		final var matcherStaticNotFavicon = new AndRequestMatcher(matcherStatic, new NegatedRequestMatcher(matcherStaticFavicon));
 		final var cacheControlHeaderStatic = new DelegatingRequestMatcherHeaderWriter(
 				matcherStatic,
 				new StaticHeadersWriter(
 						HttpHeaders.CACHE_CONTROL,
 						CacheControl.maxAge(10, TimeUnit.MINUTES).getHeaderValue()));
 		final var cacheControlHeaderNonStatic =
-				new DelegatingRequestMatcherHeaderWriter(matcherNonStatic, new CacheControlHeadersWriter());
+				new DelegatingRequestMatcherHeaderWriter(matcherNotStatic, new CacheControlHeadersWriter());
 		// spotless:off
 		http.headers(headers ->
 			headers.frameOptions(options ->
@@ -51,10 +54,12 @@ public class WebSecurityConfig {
 			)
 		)
 		.authorizeHttpRequests(requests ->
-			requests.requestMatchers(matcherStatic)
-				.authenticated()
+			requests.requestMatchers(matcherStaticNotFavicon)
+					.authenticated()
+				.requestMatchers(matcherStaticFavicon)
+					.permitAll()
 				.anyRequest()
-				.authenticated()
+					.authenticated()
 		)
 		.formLogin(login ->
 			login.loginPage("/signin")
