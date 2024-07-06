@@ -25,7 +25,7 @@ public class MvcMessageScriptController {
 			@PathVariable("locale-country") String localeCountry)
 			throws IOException {
 		if (productVersion.equals(product.getVersion())) {
-			return ResponseEntity.ok(messageService.getScript(new Locale(localeLanguage, localeCountry)));
+			return ResponseEntity.ok(messageService.getScript(Locale.of(localeLanguage, localeCountry)));
 		}
 		return ResponseEntity.notFound().build();
 	}

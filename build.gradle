@@ -1,9 +1,10 @@
 plugins {
+	id "base"
 	id "java"
 	id "eclipse"
 	id "org.springframework.boot" version "3.3.1"
 	id "io.spring.dependency-management" version "1.1.5"
-	id "io.freefair.lombok" version "6.4.3"
+	id "io.freefair.lombok" version "8.6"
 	id "com.diffplug.spotless" version "6.25.0"
 }
 
@@ -12,14 +13,17 @@ def packageJson = new groovy.json.JsonSlurper().parseText(file("package.json").t
 def packageName = packageJson.name;
 def slashIndex = packageName.indexOf("/");
 if (0 <= slashIndex) {
-	group = packageName.substring(1, slashIndex);
-	archivesBaseName = packageName.substring(slashIndex + 1);
-	version = packageJson.version;
+	base {
+		group = packageName.substring(1, slashIndex);
+		archivesName = packageName.substring(slashIndex + 1);
+	}
 } else {
-	group = "com";
-	archivesBaseName = packageName;
-	version = packageJson.version;
+	base {
+		group = "com"
+		archivesName = packageName
+	}
 }
+version = packageJson.version;
 
 // REPOSITORY
 repositories {
@@ -27,7 +31,7 @@ repositories {
 }
 
 compileJava {
-	options.release = 17
+	options.release = 21
 }
 
 // JAR
