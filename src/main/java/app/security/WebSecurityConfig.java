@@ -13,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
 import org.springframework.security.web.header.writers.DelegatingRequestMatcherHeaderWriter;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -29,12 +28,11 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		final var matcherStatic = new OrRequestMatcher(
-				new AntPathRequestMatcher("/webjars/**"),
+				new AntPathRequestMatcher("/webjars/**/*.js"),
+				new AntPathRequestMatcher("/webjars/**/*.js.map"),
 				new AntPathRequestMatcher("/asset/**"),
 				new AntPathRequestMatcher("/image/**"));
 		final var matcherNotStatic = new NegatedRequestMatcher(matcherStatic);
-		final var matcherStaticFavicon = new AntPathRequestMatcher("/asset/favicon/**");
-		final var matcherStaticNotFavicon = new AndRequestMatcher(matcherStatic, new NegatedRequestMatcher(matcherStaticFavicon));
 		final var cacheControlHeaderStatic = new DelegatingRequestMatcherHeaderWriter(
 				matcherStatic,
 				new StaticHeadersWriter(
@@ -54,9 +52,7 @@ public class WebSecurityConfig {
 			)
 		)
 		.authorizeHttpRequests(requests ->
-			requests.requestMatchers(matcherStaticNotFavicon)
-					.authenticated()
-				.requestMatchers(matcherStaticFavicon)
+			requests.requestMatchers(matcherStatic)
 					.permitAll()
 				.anyRequest()
 					.authenticated()
