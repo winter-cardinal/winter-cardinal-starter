@@ -23,7 +23,7 @@ fse.emptyDirSync(WEBJARS_DIR);
 if (0 < Object.keys(externals).length) {
 	console.log(`\x1b[32mCopying external node modules to ${WEBJARS_DIR}\x1b[39m`);
 	console.log(``);
-	const filter = (src) => src.endsWith("/") || src.endsWith(".js") || src.endsWith(".js.map");
+	const filter = (src) => src.endsWith("/") || src.endsWith(".js") || src.endsWith(".js.map") || src.endsWith(".css");
 	for (let external in externals) {
 		const data = require(`${external}/package.json`);
 		const source = path.relative(
@@ -71,9 +71,19 @@ const copy = async (module, webjarDir) => {
 	}
 };
 
+const toEntryPoint = async (module) => {
+	const base = SOURCE_DIR + module[0]
+	const ts = base + ".ts";
+	return await fse.pathExists(ts) ? ts :  base + ".tsx";
+}
+
+const toEntryPoints = async (modules) => {
+	return await Promise.all(modules.map(module => toEntryPoint(module)));
+}
+
 const build = async (modules, globalName, webjarDir, isWatchMode) => {
 	const context = await esbuild.context({
-		entryPoints: modules.map((module) => `${SOURCE_DIR}${module[0]}.ts`),
+		entryPoints: await toEntryPoints(modules),
 		target: "es6",
 		format: "iife",
 		globalName,

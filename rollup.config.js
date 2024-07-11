@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
+import replace from '@rollup/plugin-replace';
 import packageJson from './package.json';
 import copy from 'rollup-plugin-copy';
 import * as fse from 'fs-extra';
@@ -24,7 +25,7 @@ fse.emptyDirSync(WEBJARS_DIR);
 if (0 < Object.keys(externals).length) {
 	console.log(`\x1b[32mCopying external node modules to ${WEBJARS_DIR}\x1b[39m`);
 	console.log(``);
-	const filter = (src) => src.endsWith("/") || src.endsWith(".js") || src.endsWith(".js.map");
+	const filter = (src) => src.endsWith("/") || src.endsWith(".js") || src.endsWith(".js.map") || src.endsWith(".css");
 	for (let external in externals) {
 		const data = require(`${external}/package.json`);
 		const source = path.relative(
@@ -81,6 +82,10 @@ const build = (source, outfile, globalName) => {
 		}],
 		plugins: [
 			resolve(),
+			replace({
+				'process.env.NODE_ENV': JSON.stringify('production'),
+				preventAssignment: true
+			}),
 			commonjs(),
 			newTerser(banner),
 			copy({

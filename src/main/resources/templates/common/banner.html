@@ -46,32 +46,49 @@
 	</style>
 </th:block>
 
-<th:block th:fragment="body (title)">
+<th:block th:fragment="body (title)" th:with="BANNER_AUTO_CLOSE = ${BANNER_AUTO_CLOSE} ?: false">
 	<div id="banner">
 		<p th:text="${title}"></p>
 	</div>
-	<script th:inline="javascript">
-	(function(){
-		const startTime = Date.now();
-		var checker = function() {
-			if( document.body.querySelector( "canvas" ) != null ) {
-				console && console.log( "Content load finished at", Date.now() - startTime, "ms" );
-				var banner = document.querySelector( "#banner" );
-				if( banner.style.animationName !== undefined ) {
-					banner.setAttribute( "class", "done" );
-					banner.addEventListener( "animationend", function( e ) {
-						if( banner === e.target && banner.parentElement != null ) {
-							banner.parentElement.removeChild( banner );
-						}
-					});
+	<script th:inline="javascript" th:if="${!BANNER_AUTO_CLOSE}">
+		(function(){
+			const startTime = Date.now();
+			var checker = function() {
+				if( document.body.querySelector( "canvas" ) != null ) {
+					console && console.log( "Content load finished at", Date.now() - startTime, "ms" );
+					var banner = document.querySelector( "#banner" );
+					if( banner.style.animationName !== undefined ) {
+						banner.setAttribute( "class", "done" );
+						banner.addEventListener( "animationend", function( e ) {
+							if( banner === e.target && banner.parentElement != null ) {
+								banner.parentElement.removeChild( banner );
+							}
+						});
+					} else {
+						banner.parentElement.removeChild( banner );
+					}
 				} else {
-					banner.parentElement.removeChild( banner );
+					setTimeout( checker, 16 );
 				}
+			};
+			checker();
+		}());
+	</script>
+	<script th:inline="javascript" th:if="${BANNER_AUTO_CLOSE}">
+	(function(){
+		setTimeout(function() {
+			var banner = document.querySelector( "#banner" );
+			if( banner.style.animationName !== undefined ) {
+				banner.setAttribute( "class", "done" );
+				banner.addEventListener( "animationend", function( e ) {
+					if( banner === e.target && banner.parentElement != null ) {
+						banner.parentElement.removeChild( banner );
+					}
+				});
 			} else {
-				setTimeout( checker, 16 );
+				banner.parentElement.removeChild( banner );
 			}
-		};
-		checker();
+		}, 333);
 	}());
 	</script>
 </th:block>

@@ -1,5 +1,6 @@
 {
 	"pixi.js": "PIXI",
 	"@wcardinal/wcardinal": "wcardinal",
-	"@wcardinal/wcardinal-ui": "wcardinal.ui"
+	"@wcardinal/wcardinal-ui": "wcardinal.ui",
+	"leaflet": "L"
 }

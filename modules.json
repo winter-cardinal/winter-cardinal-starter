@@ -3,5 +3,6 @@
 	["empty/main", "wcs-empty", "wcs"],
 	["sensor/main", "wcs-sensor", "wcs"],
 	["trend/main", "wcs-trend", "wcs"],
-	["diagram/main", "wcs-diagram", "wcs"]
+	["diagram/main", "wcs-diagram", "wcs"],
+	["map/main", "wcs-map", "wcs"]
 ]

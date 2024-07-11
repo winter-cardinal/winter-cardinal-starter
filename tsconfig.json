@@ -15,7 +15,10 @@
 		"strict": true,
 		"downlevelIteration": false,
 		"preserveConstEnums": true,
-		"stripInternal": true
+		"stripInternal": true,
+
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react"
 	},
 	"include": [
 		"src/main/typescript/"
