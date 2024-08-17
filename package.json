@@ -18,7 +18,8 @@
 	},
 	"dependencies": {
 		"@wcardinal/wcardinal": "^2.1.0",
-		"@wcardinal/wcardinal-ui": "^0.436.0",
+		"@wcardinal/wcardinal-ui": "^0.446.0",
+		"@wcardinal/wcardinal-geditor": "^1.0.0",
 		"leaflet": "^1.9.4",
 		"pixi.js": "5.3.12"
 	},

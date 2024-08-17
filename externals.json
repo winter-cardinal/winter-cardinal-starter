@@ -2,5 +2,6 @@
 	"pixi.js": "PIXI",
 	"@wcardinal/wcardinal": "wcardinal",
 	"@wcardinal/wcardinal-ui": "wcardinal.ui",
+	"@wcardinal/wcardinal-geditor": "wcardinal.geditor",
 	"leaflet": "L"
 }

@@ -3,6 +3,7 @@ import {
 	DButton,
 	DButtonAmbient,
 	DDiagram,
+	DDiagrams,
 	DLayoutHorizontal
 } from "@wcardinal/wcardinal-ui";
 import { util } from "@wcardinal/wcardinal";
@@ -66,10 +67,8 @@ export class Main {
 				}
 			}
 		});
-		fetch("./asset/diagram/plant.json").then((response) => {
-			response.json().then((json) => {
-				result.set(json);
-			});
+		this._controller.graphic.getByName("plant").then((graphic) => {
+			result.set(DDiagrams.toSerialized(graphic));
 		});
 		return result;
 	}

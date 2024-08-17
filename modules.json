@@ -4,5 +4,7 @@
 	["sensor/main", "wcs-sensor", "wcs"],
 	["trend/main", "wcs-trend", "wcs"],
 	["diagram/main", "wcs-diagram", "wcs"],
-	["map/main", "wcs-map", "wcs"]
+	["map/main", "wcs-map", "wcs"],
+	["graphic-editor/main", "wcs-graphic-editor", "wcs"],
+	["graphic-piece-editor/main", "wcs-graphic-piece-editor", "wcs"]
 ]
